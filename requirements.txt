@@ -1,4 +1,4 @@
-django=2.0.2
+django==2.0.2
 Pillow==5.4.1
 django-ckeditor==5.6.1
 django-recaptcha==2.0.2
