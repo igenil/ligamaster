@@ -1,0 +1,21 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+<br>
+    <center>
+        {% if 'act' in request.GET %}
+            <div class="alert alert-success" style="width:50%" role="alert">
+                Perfil actualizado correctamente !
+            </div>
+        {% endif %}
+        <h1>Perfil</h1>
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-primary btn-block" style="width:40%" value="Actualizar" />
+            </form>
+        </div>
+    </center>
+    <br>
+    <br>
+ {% endblock %}

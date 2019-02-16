@@ -1,0 +1,16 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+<br>
+    <center>
+        <h1>Crear Equipo</h1>
+        <div class="container">
+            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <b>{{ form.as_p }}<b/>
+                <input type="submit" class="btn btn-primary btn-block" style="width:40%" value="Añadir" />
+            </form>
+        </div>
+    </center>
+    <br>
+    <br>
+ {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+<br>
+<div class="container">
+    <center>
+    	{% if msg %}
+			<div class="alert alert-success" style="width:50%" role="alert">
+  				Gracias por realizar su consulta !
+			</div>
+        {% endif %}
+    <p>Escriba su consulta aquí, el administrador le responderá lo mas pronto posible.</p>
+        <form id="formulario" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email"><b>Email:</b></label>
+                <input type="email" class="form-control" name="mail" aria-describedby="emailHelp" placeholder="email@gmail.com" style="width:20%">
+                <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu direccion de email.</small>
+            </div>
+            <div class="form-group">
+                <label for="mensaje"><b>Mensaje:</b></label>
+                <textarea rows="5" type="text" style="width:500px;" class="form-control" placeholder="Su consulta aquí." name="mensaje"></textarea>
+            </div>
+            <input type="submit" class="btn btn-success" value="Enviar" />
+        </form>
+    </center>
+ {% endblock %}

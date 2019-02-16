@@ -1,0 +1,20 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+<br>
+    <center >
+        <div class="container">
+            <div class="card" style="width: 18cm;  background-color:white !important;">
+                <h5 class="card-title" style="background-color:black; color:white;">{{noticia.titulo}}</h5>
+                <div class="card-body">
+                    <img class="card-img-top" src="{{noticia.imagen.url}}" style="width:18cm; height:10cm;">
+                    <div class="dropdown-divider"></div> 
+                    <p class="card-text"><b>{{noticia.descripcion}}</b><p>
+                    <div class="dropdown-divider"></div> 
+                    <p class="card-text">{{noticia.contenido | safe }}</p>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </center>
+ {% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+    <br>
+    <center>
+    {% if 'add' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Noticia creada correctamente !
+		</div>
+    {% endif %}
+    {% if 'edit' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Noticia editada correctamente !
+		</div>
+    {% endif %}
+    {% if 'del' in request.GET %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			Noticia eliminada correctamente !
+		</div>
+    {% endif %}
+    {% if request.user.is_staff %}
+        <a href="{% url "noticia_add" %}"><button type="submit" class="botonadd"><b>Añadir Noticia</b></button></a>
+    {% endif %}
+		<div class="container" style="width:60%;">
+			<div class="grid-container">
+                {% for noticia in noticia_list %}
+                    <div class="card border-warning" style="width: 10rem; background-color:white !important;">
+                        <a href="{% url 'noticia' noticia.id %}" style="text-decoration:none;">
+                            <img class="card-img-top" src="{{noticia.imagen.url}}">
+                        </a>
+                        <br>		 
+                        <h5 class="card-title" > <b> {{ noticia.titulo }}</b> </h5>
+                        <div class="dropdown-divider"></div>
+                        <br>	
+                        <h6 class="card-subtitle mb-2 text-muted"> {{ noticia.descripcion }} </h6>
+                        
+                        {% if request.user.is_staff  %}
+                            <div class="card-footer ">
+                                <a href="{% url "noticia_del" noticia.id %}">
+                                    <button type="button" class="botondel" >
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                                <a href="{% url "noticia_edit" noticia.id %}">
+                                    <button type="button" class="botonadd" >
+                                        <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        {% endif %}
+                        <br>	
+                        <br>	
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>
+    </center>
+ {% endblock %}

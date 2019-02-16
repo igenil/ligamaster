@@ -1,0 +1,48 @@
+{% extends 'noticias/plantilla.html' %}
+{% block content %}
+<style>.errorlist{color:red;}</style>
+<main role="main">
+  <div class="container" style="width:40%;">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+        <form action="" method="post">{% csrf_token %}
+            <br>
+          <center>
+            {% if 'register' in request.GET %}
+              <div class="alert alert-success" role="alert">
+                Usuario registrado correctamente
+              </div>
+            {% endif %}
+            <h3 class="mb-4">Iniciar sesión</h3>
+          
+          {% if form.non_field_errors %}
+           <div class="alert alert-danger" role="alert">Usuario o contraseña incorrectos</p></div>
+          {% endif %}
+          </center>
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" name="username" placeholder="Usuario">
+            </div>
+          </div>
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Password</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fas fa-key"></i></div>
+              </div>
+              <input type="password" class="form-control" id="inlineFormInputGroup" name="password" placeholder="contraseña">
+            </div>
+            <p><input type="submit" class="btn btn-primary btn-block" value="Entrar"></p>
+            <p><a href="{% url 'signup' %}" class="btn btn-success btn-block" >Regístrate</p></a>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

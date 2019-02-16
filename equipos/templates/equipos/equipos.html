@@ -1,0 +1,56 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+    <br>
+    <center>
+    {% if 'add' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Equipo creado correctamente !
+		</div>
+    {% endif %}
+    {% if 'edit' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Equipo editado correctamente !
+		</div>
+    {% endif %}
+    {% if 'del' in request.GET %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			Equipo eliminado correctamente !
+		</div>
+    {% endif %}
+        {% if request.user.perfil.id %}
+            <a href="{% url 'equipo_add' request.user.perfil.id %}"><button type="submit" class="botonadd"><b>Añadir Equipo</b></button></a>
+        {% endif %}
+		<div class="container" style="width:80%;">
+			<div class="grid-equipos" >
+                {% for equipo in equipos %}
+                    <div class="card border-warning" style="width: 10rem; background-color:white !important; ">
+                        <br>
+                        <a href="{% url 'equipo' equipo.id %}">
+                            <img class="card-img-top" style="width:20% !important;" src="{{equipo.imagen.url}}">
+                        </a>
+                        <br>
+                        <h5 class="card-title"> <b> {{ equipo.nombre }}</b> </h5>
+                        {% if request.user.is_staff or request.user.perfil.equipo.id == equipo.id %}
+                            {% if request.user.is_staff or request.user.perfil.capitan %}
+                                <div class="card-footer">
+                                    <a href="{% url "equipo_del" equipo.id %}">
+                                        <button type="button" class="botondel" >
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                    <a href="{% url "equipo_edit" equipo.id %}">
+                                        <button type="button" class="botonadd" >
+                                            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>
+    </center>
+ {% endblock %}

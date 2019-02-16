@@ -1,0 +1,44 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+<br>
+    
+        <div class="container" style="width:80%;">
+            <center><h5 style="color:white !important; background-color:black !important;"> <b>Club</b> </h5></center>
+            <div class="media" style="background-color:white; float:center;"> 
+                <img  src="{{equipo.imagen.url}}" class="mt-4" style='padding-left: 5em'>
+                <div class="media-body" style='padding-left: 20em'>
+                    <br>
+                    <li><b>Nombre:</b> {{equipo.nombre}}</li>
+                    <li><b>Fundación:</b> {{equipo.fundacion}}</li>
+                    <li><b>Presidente:</b> {{equipo.presidente}}</li>
+                    <li><b>Estadio:</b> {{equipo.estadio}}</li>
+                    <li><b>Dirección:</b> {{equipo.direccion}}</li>
+                    <li><b>Web:</b> {{equipo.web}}</li>
+                    <br>
+                </div>
+            </div>  
+            <div class="dropdown-divider"></div>  
+            <center>    
+                <div class="grid-equipos" style="background-color:white;" >
+                    
+                    {% for jugador in equipo.jugadores.all %}
+                    <div>
+                        {% if jugador.imagen %}
+                            <img style="width:100px !important;" class="img-thumbnail" src="{{jugador.imagen.url}}">
+                            <p><b>{{jugador.nombre}}</p></b>
+                        {% else %}
+                        {% load static %}
+                            <img style="width:100px !important;" class="img-thumbnail" src={% static 'equipos/img/nojugador.jpg' %}>
+                            <p><b>{{jugador.nombre}}</p></b>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </center>
+            <br>
+            </div>
+        </div>
+    
+ {% endblock %}

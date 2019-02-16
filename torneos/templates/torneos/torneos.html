@@ -1,0 +1,78 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %} 
+    <br>
+    <center>
+    {% if 'add' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Torneo creada correctamente !
+		</div>
+    {% endif %}
+    {% if 'edit' in request.GET %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			Torneo editada correctamente !
+		</div>
+    {% endif %}
+    {% if 'del' in request.GET %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			Torneo eliminada correctamente !
+		</div>
+    {% endif %}
+    {% if error1 %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			{{ error1 }}
+		</div>
+    {% endif %}
+    {% if error2 %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			{{ error2 }}
+		</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success" style="width:50%" role="alert">
+  			{{ success }}
+		</div>
+    {% endif %}
+    {% if request.user.is_staff %}
+        <a href="{% url "torneo_add" %}"><button type="submit" class="botonadd"><b>Añadir Torneo</b></button></a>
+    {% endif %}
+		<div class="container" style="width:60%;">
+			<div class="grid-container">
+                {% for torneo in torneos %}
+                
+                    <div class="card" style="width: 18rem; background-color:white !important;">
+                            <a style="text-decoration:none;" href="{% url 'participaciones' torneo.id %}">	 
+                                <h5 class="card-title" style="background-color:black; color:white;"> <b> {{ torneo.titulo }}</b> </h5>
+                                <div class="dropdown-divider"></div>
+                                <br>	
+                                <h6 class="card-subtitle mb-2 text-muted"> {{ torneo.descripcion }} </h6>
+                                <div class="dropdown-divider"></div>
+                                <h6 class="card-subtitle mb-2 text-muted"> Quedan {{ torneo.participantes }} plazas. </h6>
+                            </a>
+                            <div class="card-footer ">
+                                {% if request.user.is_staff %}
+                                    <a href="{% url "torneo_del" torneo.id %}">
+                                        <button type="button" class="botondel" >
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                    <a href="{% url "torneo_edit" torneo.id %}">
+                                        <button type="button" class="botonadd" >
+                                            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                {% endif %}
+                                <a href="{% url "torneo_apuntar" torneo.id %}">
+                                    <button type="button" class="botonapuntar" >
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>
+    </center>
+ {% endblock %}

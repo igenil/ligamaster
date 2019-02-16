@@ -1,0 +1,20 @@
+{% extends 'noticias/plantilla.html' %}
+{% block content %}
+    <br> <br> <br> <br> <br>
+    <main role="main">
+    <div class="container" >
+        <div class="row mt-3" >
+            <div class="col-md-9 mx-auto">
+                <div >
+                    <form action="" method="post">{% csrf_token %}
+                        <p style="text-align:center;">¿Estás seguro de que quieres borrar <b>"{{ object }}"</b>?</p>
+                        <center><input type="submit" style="width:50%;" class="btn btn-success btn-block" value="Sí, borrar el equipo '{{ object }}''" /></center>
+                    </form>
+                    <br>
+                    <center><a href="{% url 'equipos' %}" class="btn btn-danger btn-block" style="width:50%;">Cancelar</a></center>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+{% endblock %}

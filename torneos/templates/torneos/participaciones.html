@@ -1,0 +1,38 @@
+{% extends 'noticias/plantilla.html' %}
+
+{% block content %}
+    <br>
+    <center>
+        <div style="width:60%;">
+        <a class="btn btn-warning" style="float:right" onclick="imprimir()"><b>Imprimir página</b></a>
+            <table class="table" style="background-color: #babbbc">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"> Equipo </th>
+                        <th scope="col"> Puesto </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for participacion in participaciones %}
+                    <tr>
+                        <th>{{ participacion.equipo }}</th>
+                        <th>
+                    {% if participacion.puesto != None %}
+                        {{ participacion.puesto }}
+                        </th>
+                    {% else %}
+                        <form action="{% url 'addpuesto' participacion.id %}" method="post">{% csrf_token %}
+                            {{ form.puesto }}
+                            <th>
+                                <input type="submit" class="btn btn-primary" style="width:60%" value="Añadir" />
+                            </th>
+                        </form>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>		
+            </table>
+        </div>
+    </center>
+{% endblock %}
