@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'ignaciogenil.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ignaciogenil$default'
         'USER': 'ignaciogenil',
         'PASSWORD': 'admin123'
