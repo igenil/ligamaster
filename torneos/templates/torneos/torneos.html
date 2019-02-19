@@ -5,17 +5,22 @@
     <center>
     {% if 'add' in request.GET %}
         <div class="alert alert-success" style="width:50%" role="alert">
-  			Torneo creada correctamente !
+  			Torneo creado correctamente !
 		</div>
     {% endif %}
     {% if 'edit' in request.GET %}
         <div class="alert alert-success" style="width:50%" role="alert">
-  			Torneo editada correctamente !
+  			Torneo editado correctamente !
 		</div>
     {% endif %}
     {% if 'del' in request.GET %}
         <div class="alert alert-danger" style="width:50%" role="alert">
-  			Torneo eliminada correctamente !
+  			Torneo eliminado correctamente !
+		</div>
+    {% endif %}
+    {% if error %}
+        <div class="alert alert-danger" style="width:50%" role="alert">
+  			{{ error }}
 		</div>
     {% endif %}
     {% if error1 %}
@@ -49,26 +54,29 @@
                                 <div class="dropdown-divider"></div>
                                 <h6 class="card-subtitle mb-2 text-muted"> Quedan {{ torneo.participantes }} plazas. </h6>
                             </a>
-                            <div class="card-footer ">
-                                {% if request.user.is_staff %}
-                                    <a href="{% url "torneo_del" torneo.id %}">
-                                        <button type="button" class="botondel" >
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
-                                    <a href="{% url "torneo_edit" torneo.id %}">
-                                        <button type="button" class="botonadd" >
-                                            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
-                                {% endif %}
-                                <a href="{% url "torneo_apuntar" torneo.id %}">
-                                    <button type="button" class="botonapuntar" >
-                                        <i class="fas fa-clipboard-list"></i>
-                                    </button>
-                                </a>
-                            </div>
-                        
+                            {% if request.user.perfil.capitan == True %}
+                                <div class="card-footer ">
+                                    {% if request.user.is_staff %}
+                                        <a href="{% url "torneo_del" torneo.id %}">
+                                            <button type="button" class="botondel" >
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </a>
+                                        <a href="{% url "torneo_edit" torneo.id %}">
+                                            <button type="button" class="botonadd" >
+                                                <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                                            </button>
+                                        </a>
+                                    {% endif %}
+
+                                        <a href="{% url "torneo_apuntar" torneo.id %}">
+                                            <button type="button" class="botonapuntar" >
+                                                <i class="fas fa-clipboard-list"></i>
+                                            </button>
+                                        </a>
+
+                                </div>
+                        {% endif %}   
                     </div>
                 {% endfor %}
             </div>

@@ -22,12 +22,17 @@
                         {{ participacion.puesto }}
                         </th>
                     {% else %}
-                        <form action="{% url 'addpuesto' participacion.id %}" method="post">{% csrf_token %}
-                            {{ form.puesto }}
-                            <th>
-                                <input type="submit" class="btn btn-primary" style="width:60%" value="Añadir" />
+                        {% if request.user.is_staff %}
+                            <form action="{% url 'addpuesto' participacion.id %}" method="post">{% csrf_token %}
+                                {{ form.puesto }}
+                                <th>
+                                    <input type="submit" class="btn btn-primary" style="width:60%" value="Añadir" />
+                                </th>
+                            </form>
+                        {% else %}
+                            NO ASIGNADA
                             </th>
-                        </form>
+                        {% endif %}
                     {% endif %}
                     </tr>
                 {% endfor %}

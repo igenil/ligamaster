@@ -14,10 +14,6 @@ class NoticiaDetail(DetailView):
     model=Noticia
     template_name="noticias/noticia.html"
 
-# def infonoticia(request, id):
-#     noticia = get_object_or_404(Noticia, id=id)
-#     return render(request,"noticias/noticia.html", {'noticia':noticia})
-
 class NoticiaCreate(CreateView):
     model=Noticia
     form_class=NoticiaForm

@@ -59,11 +59,14 @@ def torneo_apuntar(request,id):
     torneo = get_object_or_404(Torneo,id=id)
     equipo_user=request.user.perfil.equipo
     torneos = Torneo.objects.all()
+    if (equipo_user==None):
+        error="Lo sentimos,no formas parte de ningun equipo aun"
+        return render(request,'torneos/torneos.html',{'error':error,'torneos':torneos})
     if (Participaciones.objects.filter(equipo=equipo_user, torneo=torneo)):
         error1="Tu equipo ya esta apuntado a este torneo"
         return render(request,'torneos/torneos.html',{'error1':error1,'torneos':torneos})
     else:
-        if (torneo.participantes>0):
+        if (torneo.participantes>0 and request.user.perfil.capitan==True):
             participacion=Participaciones(torneo=torneo, equipo=equipo_user)
             participacion.save()
             torneo.participantes-=1
